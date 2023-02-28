@@ -1,6 +1,6 @@
 // Definindo as matrizes A, B e C como arrays de arrays
-let A = [[1.0001, 0], [1.9995, 4]];
-let B = [[4.002, 0], [0, -1.3333]];
+let A = [[1.00, 0], [1.99, 4]];
+let B = [[4.00, 0], [0, -1.33]];
 let C = [[4, 2], [-8, 0.1]];
 
 // Função para multiplicar duas matrizes de ordem 2
