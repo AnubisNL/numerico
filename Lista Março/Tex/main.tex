@@ -1,7 +1,7 @@
 \documentclass{article}
 
 % Language setting
-% Replace `english' with e.g. `spanish' to change the document language
+
 \usepackage[brazil]{babel}
 
 % Set page size and margins
@@ -12,7 +12,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
-
+\usepackage{tikz ,tkz-base, tkz-fct}
 \title{Lista de Fevereiro}
 \author{Natan Ledur}
 
@@ -49,14 +49,29 @@
       \begin{equation*}
       \begin{pmatrix} 5 &-1  &10 \\-\frac{1}{5}& \frac{1}{25} & -\frac{2}{5} \\ 3 & 4 & 2 \end{pmatrix}
       \xrightarrow[]{L_3=L_3-(\frac{3}{5})L_1}
-      \begin{pmatrix} 5 &-1  &10 \\-\frac{1}{5}& \frac{1}{25} & -\frac{2}{5} \\ 3 & 4 & 2 \end{pmatrix}
+      \begin{pmatrix} 5 &-1  &10 \\-\frac{1}{5}& \frac{1}{25} & -\frac{2}{5} \\ 0 & \frac{23}{5} & -\frac{20}{5} \end{pmatrix}
       \end{equation*}
-      
+      Obtemos assim um sistema mais simples de se resolver:
       \begin{equation}
-        B = \left\{\begin{matrix} 5x - y = 10 \\ -\frac{1}{5} + \frac{y}{25} = -\frac{2}{5} \\ 3x+4y=2 \end{matrix}\right.
+        B = \left\{\begin{matrix} 5x - y = 10 \\ \medskip -\frac{1}{5} + \frac{y}{25} = -\frac{2}{5} \\  \frac{23}{5}y= -\frac{20}{5} \end{matrix}\right.
       \end{equation}
        \\ 
        Resolvendo o sistema (2) temos que,$\left [ \left [ y=-\frac{20}{23}  , x=\frac{42}{23}  \right ] \right ]$ , com isso vemos que o sistema B é consistente.
+    Podemos analisar também através do gráfico das funções.
+    
+    \begin{tikzpicture}
+        \tkzInit[   xmin=-2, xmax=40,xstep=10,
+                    ymin=-2, ymax=30,ystep=10]
+        \tkzDrawX
+        \tkzDrawY        
+         
+        \tkzFct[domain=0:40]{\frac{105}{x}}
+
+
+    \end{tikzpicture}  
+
+
+
       \begin{itemize}
           \item Para o sistema C temos;
       \end{itemize}
