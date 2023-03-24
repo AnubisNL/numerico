@@ -1,2 +1,2 @@
-# númerico
- Repositorio destinado a disciplina de calculo númerico 
+# numérico
+ Repositorio destinado a disciplina de calculo numérico 
