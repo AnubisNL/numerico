@@ -25,7 +25,7 @@
        \ \
       B = \left\{\begin{matrix} 5x - y = 10 \\ -\frac{1}{5} + \frac{y}{25} = -\frac{2}{5} \\ 3x+4y=2 \end{matrix}\right.
       \ \
-      C = \left\{\begin{matrix}  x + y - z = 2 \\ -x -y +z = 0 \\ x+2y-3z \end{matrix}\right.
+      C = \left\{\begin{matrix}  x + y - z = 2 \\ -x -y +z = 0 \\ x+2y-3z=4 \end{matrix}\right.
       \end{equation*}
       \begin{itemize}
           \item Para o sistema A temos;
@@ -40,10 +40,31 @@
       A = \left\{\begin{matrix} x+2y=2\\  7y=8 \end{matrix}\right.
       \end{equation}
       \\
-      Resolvendo o sistema (1) temos,$\left [ \left [ y=\frac{7}{8}  , x=-\frac{2}{7}  \right ] \right ]$ , com isso vemos que o sistema A é consistente.
+      Resolvendo o sistema (1) temos,$\left [ \left [ y=\frac{8}{7}  , x=-\frac{2}{7}  \right ] \right ]$ , com isso vemos que o sistema A é consistente.
+      \begin{center}
+        \begin{tikzpicture}
+            \tkzInit[   xmin=-3, xmax=3,
+                        ymin=-3, ymax=3]
+            \tkzDrawX
+            \tkzDrawY        
+             
+            % primeira reta
+            \draw[domain=-2:3,variable=\x,red] plot ({\x},{(2-\x)/2});
+            % segunda reta
+            \draw[domain=-1:0.5,variable=\x,green] plot ({\x},{3*\x+2});
+  
+            % ponto de interseção
+            \filldraw[black] (-0.285714,1.1428) circle (0.05cm) node[anchor=west] {$(-2/7,8/7)$};
+            
+        \end{tikzpicture}  
+        \end{center}
+
+
       % Sistema B
       \begin{itemize}
-          \item É possível notar que no sistema B a segunda equação é a primeira equação multiplicado por $ -\frac{1}{25}$, logo podemos podemos analisar uma das duas com a ultima equação e teremos nosso resultado. \bigskip
+          \item Para o sistema A temos;
+          \\          
+          É possível notar que no sistema B a segunda equação é a primeira equação multiplicado por $ -\frac{1}{25}$, logo podemos podemos analisar uma das duas com a ultima equação e teremos nosso resultado. 
           
       \end{itemize}
       \begin{equation*}
@@ -56,8 +77,8 @@
         B = \left\{\begin{matrix} 5x - y = 10 \\ \medskip -\frac{1}{5} + \frac{y}{25} = -\frac{2}{5} \\  \frac{23}{5}y= -\frac{20}{5} \end{matrix}\right.
       \end{equation}
        \\ 
-       Resolvendo o sistema (2) temos que,$\left [ \left [ y=-\frac{20}{23}  , x=\frac{42}{23}  \right ] \right ]$ , com isso vemos que o sistema B é consistente.
-    Podemos analisar também através do gráfico das funções, onde o ponto de intercessão é $ y=-\frac{20}{23}  , x=\frac{42}{23} $
+       Resolvendo o sistema (2) temos que,$\left [ \left [ y=-\frac{20}{23}  , x=\frac{42}{23}  \right ] \right ]$ , com isso vemos que o sistema B é consistente. \\
+    \\ Podemos analisar também através do gráfico das funções, onde o ponto de intercessão é $ y=-\frac{20}{23}  , x=\frac{42}{23} $
     
     \begin{center}
     \begin{tikzpicture}
@@ -70,15 +91,17 @@
         \draw[domain=1.3:2.5,variable=\x,red] plot ({\x},{5*\x-10/1});
         % segunda reta
         \draw[domain=-2:3,variable=\x,green] plot ({\x},{(2-3*\x)/4});
+         % ponto de interseção
+        \filldraw[black] (1.826,-0.869) circle (0.05cm) node[anchor=west] {$(\frac{42}{23},-\frac{20}{23})$};
         
     \end{tikzpicture}  
     \end{center}
 
-
       \begin{itemize}
           \item Para o sistema C temos;
       \end{itemize}
- 
+      
+
 \end{document}
     
 
