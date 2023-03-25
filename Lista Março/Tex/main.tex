@@ -62,9 +62,8 @@
 
       % Sistema B
       \begin{itemize}
-          \item Para o sistema A temos;
-          \\          
-          É possível notar que no sistema B a segunda equação é a primeira equação multiplicado por $ -\frac{1}{25}$, logo podemos podemos analisar uma das duas com a ultima equação e teremos nosso resultado. 
+          \item Para o sistema B temos;\\               
+          É possível notar que no sistema B a segunda equação é a primeira equação multiplicado por $ -\frac{1}{25}$, logo podemos analisar uma das duas com a ultima equação e teremos nosso resultado. 
           
       \end{itemize}
       \begin{equation*}
@@ -77,8 +76,8 @@
         B = \left\{\begin{matrix} 5x - y = 10 \\ \medskip -\frac{1}{5} + \frac{y}{25} = -\frac{2}{5} \\  \frac{23}{5}y= -\frac{20}{5} \end{matrix}\right.
       \end{equation}
        \\ 
-       Resolvendo o sistema (2) temos que,$\left [ \left [ y=-\frac{20}{23}  , x=\frac{42}{23}  \right ] \right ]$ , com isso vemos que o sistema B é consistente. \\
-    \\ Podemos analisar também através do gráfico das funções, onde o ponto de intercessão é $ y=-\frac{20}{23}  , x=\frac{42}{23} $
+       Resolvendo o sistema (2) temos que,$\left [ \left [ y=-\frac{20}{23}  , x=\frac{42}{23}  \right ] \right ]$ , com isso vemos que o sistema B é consistente.\bigskip
+    \\ \\ Podemos analisar também através do gráfico das funções, que o ponto de intercessão é $ y=-\frac{20}{23}  , x=\frac{42}{23} $.
     
     \begin{center}
     \begin{tikzpicture}
@@ -100,8 +99,24 @@
       \begin{itemize}
           \item Para o sistema C temos;
       \end{itemize}
-      
-
+    \begin{equation*}\begin{pmatrix}
+      1 & 2 & -1 &2 \\ 
+       -1& -1 &  1& 0\\ 
+       1&  2&  -3& 4
+      \end{pmatrix}
+      \xrightarrow[]{L_2=L_2 - (-1)L_1} 
+      \begin{pmatrix}
+      1 & 2 & -1 &2 \\ 
+       0& 0 &  0& 2\\ 
+       1&  2&  -3& 4
+      \end{pmatrix}\end{equation*}
+ Resultando na matriz
+\begin{equation}
+  C = \left\{\begin{matrix}  x + y - z = 2 \\ 0 = 2 \\ x+2y-3z=4 \end{matrix}\right.
+\end{equation} 
+\\
+Como $0=2$ é um absurdo o sistema (3) não pode ser resolvido logo o sistema C não é consistente.\\
+Uma forma mais rápida de ver que o sistema não é consistente e ver que a primeira e a segunda equação do sistema são planos paralelos, sendo assim não possuem interseção.
 \end{document}
     
 
