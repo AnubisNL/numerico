@@ -1,29 +1,30 @@
 function eliminacaoDeGauss(A, b) {
-    const n = A.length;
-    
-    // Eliminação gaussiana
-    for (let k = 0; k < n-1; k++) {
-      for (let i = k+1; i < n; i++) {
-        const fator = A[i][k] / A[k][k];
-        for (let j = k+1; j < n; j++) {
-          A[i][j] -= fator * A[k][j];
-        }
-        b[i] -= fator * b[k];
-      }
-    }
+  const n = A.length;
   
-    // Retrosubstituição
-    const x = new Array(n);
-    for (let i = n-1; i >= 0; i--) {
-      let soma = 0;
-      for (let j = i+1; j < n; j++) {
-        soma += A[i][j] * x[j];
+  // Eliminação gaussiana
+  for (let k = 0; k < n-1; k++) {
+    for (let i = k+1; i < n; i++) {
+      const fator = A[i][k] / A[k][k];
+      for (let j = k+1; j < n; j++) {
+        A[i][j] -= fator * A[k][j];
       }
-      x[i] = (b[i] - soma) / A[i][i];
+      b[i] -= fator * b[k];
     }
-  
-    return x;
   }
+
+  // Retrosubstituição
+  const x = new Array(n);
+  for (let i = n-1; i >= 0; i--) {
+    let soma = 0;
+    for (let j = i+1; j < n; j++) {
+      soma += A[i][j] * x[j];
+    }
+    x[i] = (b[i] - soma) / A[i][i];
+  }
+
+  return x;
+}
+
 
   function eliminacaoDeGaussComPivotamento(A, b) {
     const n = A.length;

@@ -13,13 +13,24 @@
 \usepackage{graphicx}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 \usepackage{tikz ,tkz-base, tkz-fct}
+\usepackage{upquote}
+\usepackage{listings}
+\lstdefinelanguage{JavaScript}{
+  morekeywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  morecomment=[s]{/*}{*/},
+  morecomment=[l]//,
+  morestring=[b]",
+  morestring=[b]'
+}
+
+
 \title{Lista de Fevereiro}
 \author{Natan Ledur}
 
 \begin{document}
 \maketitle
 
-\section{Exercício 1.}
+\section{Exercício }
 \begin{equation*}
       A= \left\{\begin{matrix} x + 2y = 2 \\  -3x + y=2 \end{matrix}\right. 
        \ \
@@ -117,6 +128,177 @@
 \\
 Como $0=2$ é um absurdo o sistema (3) não pode ser resolvido logo o sistema C não é consistente.\\
 Uma forma mais rápida de ver que o sistema não é consistente e ver que a primeira e a segunda equação do sistema são planos paralelos, sendo assim não possuem interseção.
-\end{document}
+
+\section{Exercício }
+
+\begin{lstlisting}[language=JavaScript, caption=métodos de eliminação de Gauss e Gauss com pivotamento.]
+  
+  function gausspivo(A, b) {
+    const n = A.length;
+    const Ab = new Array(n);
+  
+   
+    for (let i = 0; i < n; i++) {
+      Ab[i] = [...A[i], b[i]];
+    }
+
+    for (let i = 0; i < n; i++) {
     
+      let max = Math.abs(Ab[i][i]);
+      let maxIndex = i;
+      for (let j = i + 1; j < n; j++) {
+        if (Math.abs(Ab[j][i]) > max) {
+          max = Math.abs(Ab[j][i]);
+          maxIndex = j;
+        }
+      }
+  
+      
+      if (maxIndex !== i) {
+        [Ab[i], Ab[maxIndex]] = [Ab[maxIndex], Ab[i]];
+      }
+  
+      
+      for (let j = i + 1; j < n; j++) {
+        const factor = Ab[j][i] / Ab[i][i];
+        for (let k = i; k <= n; k++) {
+          Ab[j][k] -= factor * Ab[i][k];
+        }
+      }
+    }
+  
+    
+    const x = new Array(n);
+    for (let i = n - 1; i >= 0; i--) {
+      let sum = 0;
+      for (let j = i + 1; j < n; j++) {
+        sum += Ab[i][j] * x[j];
+      }
+      x[i] = (Ab[i][n] - sum) / Ab[i][i];
+    }
+  
+    return x;
+  }
+  function gauss(A, b) {
+    const n = A.length;
+    const Ab = new Array(n);
+  
+    
+    for (let i = 0; i < n; i++) {
+      Ab[i] = [...A[i], b[i]];
+    }
+  
+    
+    for (let i = 0; i < n - 1; i++) {
+      for (let j = i + 1; j < n; j++) {
+        const factor = Ab[j][i] / Ab[i][i];
+        for (let k = i; k <= n; k++) {
+          Ab[j][k] -= factor * Ab[i][k];
+        }
+      }
+    }
+  
+    
+    const x = new Array(n);
+    for (let i = n - 1; i >= 0; i--) {
+      let sum = 0;
+      for (let j = i + 1; j < n; j++) {
+        sum += Ab[i][j] * x[j];
+      }
+      x[i] = (Ab[i][n] - sum) / Ab[i][i];
+    }
+  
+    return x;
+  }
+  function decomposeLU(A) {
+    const n = A.length;
+    const L = new Array(n).fill(null).map(() => new Array(n).fill(0));
+    const U = new Array(n).fill(null).map(() => new Array(n).fill(0));
+  
+    // Inicializa L com a diagonal principal igual a 1
+    for (let i = 0; i < n; i++) {
+      L[i][i] = 1;
+    }
+  
+    
+    for (let i = 0; i < n; i++) {
+      
+      let maxRow = i;
+      for (let j = i + 1; j < n; j++) {
+        if (Math.abs(A[j][i]) > Math.abs(A[maxRow][i])) {
+          maxRow = j;
+        }
+      }
+  
+      
+      [A[i], A[maxRow]] = [A[maxRow], A[i]];
+      [L[i], L[maxRow]] = [L[maxRow], L[i]];
+  
+      
+      for (let j = i + 1; j < n; j++) {
+        const factor = A[j][i] / A[i][i];
+        L[j][i] = factor;
+        for (let k = i; k < n; k++) {
+          A[j][k] -= factor * A[i][k];
+        }
+      }
+    }
+  
+    
+    for (let i = 0; i < n; i++) {
+      for (let j = i; j < n; j++) {
+        U[i][j] = A[i][j];
+      }
+    }
+  
+    return { L, U };
+  }
+  
+  const A = [[0.4096, 0.1234, 0.3678,0.2943],
+             [0.2246, 0.3872, 0.4015,0.1129],
+             [0.3645, 0.1920, 0.3781,0.0643],
+             [0.1784,0.4002,0.2786,0.3927]]
+  const b = [0.4043, 0.1550, 0.4240,0.2557]
+  const x = gauss(A, b);
+  console.log(x); // [ 2, 1, -1 ]
+  const a = gausspivo(A, b);
+  console.log(a); // [ 2, 1, -1 ]
+  const { L, U } = decomposeLU(A);
+  console.log("L = ", L);
+  console.log("U = ", U);
+  \end{lstlisting}
+  \begin{lstlisting}[language=JavaScript, caption=Execussão do codido]
+    node main.js
+    [3.4605863893500874,
+    1.56095288560023,  
+    -2.934233975722392,
+    -0.4300595137280605]
+    
+    [3.4605863893500883, 
+    1.560952885600231,  
+    -2.9342339757223943,
+    -0.4300595137280602]
+
+
+    L =  [[ 1, 0, 0, 0 ],
+        [ 0.435546875, 0, 0, 1 ],
+        [ 0.54833984375, 0.9223022681839759, 0, 0 ],
+        [ 0.8898925781249999, 0.23722448222558723, 0.2506079359717326, 0 ]]
+
+    U =  [[ 0.4096, 0.1234, 0.3678, 0.2943 ],
+        [ 0, 0.346453515625, 0.118405859375, 0.26451855468749996 ],
+        [ 0, 0, 0.09061461280091464, -0.2924424789806533 ],
+        [ 0, 0, 0, -0.18705725686919206 ]]
+  \end{lstlisting}
+   
+
+  
+
+
+
+
+\end{document}
+
+
+ 
 
