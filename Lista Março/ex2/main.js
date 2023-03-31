@@ -125,10 +125,15 @@ function gausspivo(A, b) {
              [0.3645, 0.1920, 0.3781,0.0643],
              [0.1784,0.4002,0.2786,0.3927]]
   const b = [0.4043, 0.1550, 0.4240,0.2557]
-  const x = gauss(A, b);
+  const A1 = [[1,1,20**9],
+              [1,-1,10**9],
+              [2,2,0]]
+  const b1 = [1,1,1]
+
+  const x = gauss(A1, b1);
   console.log(x); // [ 2, 1, -1 ]
-  const a = gausspivo(A, b);
+  const a = gausspivo(A1, b1);
   console.log(a); // [ 2, 1, -1 ]
-  const { L, U } = decomposeLU(A);
+  const { L, U } = decomposeLU(A1);
   console.log("L = ", L);
   console.log("U = ", U);

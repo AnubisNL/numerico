@@ -29,8 +29,9 @@
 
 \begin{document}
 \maketitle
+Visite o diretório no \href{https://github.com/AnubisNL/numerico/tree/main/Lista%20Mar%C3%A7o}{GitHub} para ter acesso aos arquivos usados neste presente trabalho.
 
-\section{Exercício }
+\section{Exercício}
 \begin{equation*}
       A= \left\{\begin{matrix} x + 2y = 2 \\  -3x + y=2 \end{matrix}\right. 
        \ \
@@ -129,9 +130,9 @@
 Como $0=2$ é um absurdo o sistema (3) não pode ser resolvido logo o sistema C não é consistente.\\
 Uma forma mais rápida de ver que o sistema não é consistente e ver que a primeira e a segunda equação do sistema são planos paralelos, sendo assim não possuem interseção.
 
-\section{Exercício }
+\section{Exercício}
 
-\begin{lstlisting}[language=JavaScript, caption=métodos de eliminação de Gauss e Gauss com pivotamento.]
+\begin{lstlisting}[language=JavaScript, caption=Métodos de eliminação de Gauss e Gauss com pivotamento.]
   
   function gausspivo(A, b) {
     const n = A.length;
@@ -290,11 +291,115 @@ Uma forma mais rápida de ver que o sistema não é consistente e ver que a prim
         [ 0, 0, 0.09061461280091464, -0.2924424789806533 ],
         [ 0, 0, 0, -0.18705725686919206 ]]
   \end{lstlisting}
-   
-
+   \bigskip
+ \begin{itemize}
+  \item Para a matriz:
+ \end{itemize}
+ \begin{equation*}
+  A=\begin{pmatrix}
+    1 & 1 &2\times 10^{9} \\ 
+     1& -1 & 10^{9}\\ 
+     2& 2 & 0
+    \end{pmatrix},
+   b= \begin{pmatrix}
+      1\\1\\1
+    \end{pmatrix}
+ \end{equation*}
+ Temos o seguinte resultado no console 
+ \begin{lstlisting}[language=JavaScript, caption={Resoltado}]
+  [ 0.74951171875, -0.24951171875000003, 9.765625e-13 ]
+  [ 0.74951171875, -0.24951171875, 9.765625e-13 ]
+L =  [ [ 0, 0, 1 ], [ 0.5, 1, 0 ], [ 0.5, -0, 0 ] ]
+U =  [ [ 2, 2, 0 ], [ 0, -2, 1000000000 ], [ 0, 0, 512000000000 ] ]
   
+ \end{lstlisting}
+ \bigskip
+ Como podemos ver, os resultados encontrados pelos dois métodos são diferentes. Além disso, esses resultados não resolvem o problema inicial, pois os valores encontrados para x têm magnitude muito grande, o que sugere uma perda significativa de precisão.
 
+\section{Execício}
+Considerado a matriz triangular simétrica:
+\begin{equation*}
+  A=\begin{pmatrix}
+    5&-1&0&0&\cdots &0\\
+    -1&5&-1&0&\cdots &0\\
+    \vdots &\vdots &\vdots &\ddots&\vdots&\vdots\\
+    0&0&0&\cdots&5&-1\\
+    0&0&0&\cdots&-1&5
+  \end{pmatrix}
+\end{equation*}
+\begin{itemize}
+  \item Segue a função em JavaScript para a decomposição de Cholesky 
+\end{itemize}
+\begin{lstlisting}[language=JavaScript, caption={Deconposição de Cholesky}]
+  unction cholesky(A) {
+    const n = A.length;
+    const L = Array(n).fill().map(() => Array(n).fill(0));
+  
+    for (let i = 0; i < n; i++) {
+      for (let j = 0; j <= i; j++) {
+        let sum = 0;
+        for (let k = 0; k < j; k++) {
+          sum += L[i][k] * L[j][k];
+        }
+  
+        if (i === j) {
+          L[i][j] = Math.sqrt(A[i][i] - sum);
+        } else {
+          L[i][j] = (A[i][j] - sum) / L[j][j];
+        }
+      }
+    }
+  
+    return L;
+  }
+\end{lstlisting}
 
+\begin{itemize}
+  \item Para obter a matriz G para A de ondem $4\times4$, $5\times5$ e temos:
+\end{itemize}
+\begin{lstlisting}[language=JavaScript, caption={Resuldado $4\times4$ }]
+  [ 2.23606797749979, 0, 0, 0 ],
+  [ -0.4472135954999579, 2.1908902300206643, 0, 0 ],
+  [ 0, -0.45643546458763845, 2.188987589427283, 0 ],
+  [ 0, 0, -0.45683219257612856, 2.188904828407596 ]
+\end{lstlisting}
+\begin{lstlisting}[language=JavaScript, caption={Resuldado $5\times5$ }]
+  [ 2.23606797749979, 0, 0, 0, 0 ],
+  [ -0.4472135954999579, 2.1908902300206643, 0, 0, 0 ],
+  [ 0, -0.45643546458763845, 2.188987589427283, 0, 0 ],
+  [ 0, 0, -0.45683219257612856, 2.188904828407596, 0 ],
+  [ 0, 0, 0, -0.45684946509414437, 2.188901223500776 ]
+\end{lstlisting}
+
+\begin{itemize}
+  \item Para resolver este pontos vamos criar uma função que nos possibilite a criação de uma matriz $n\times n$ de forma automática;
+\end{itemize}
+\begin{lstlisting}[language=JavaScript, caption={Matriz $n\times n$ }]
+  function createTridiagonalMatrix(n) {
+    // Inicializa a matriz com todos os elementos iguais a 0
+    let matrix = Array(n).fill().map(() => Array(n).fill(0));
+  
+    // Adiciona os elementos da diagonal principal
+    for (let i = 0; i < n; i++) {
+      matrix[i][i] = 5;
+    }
+  
+    // Adiciona os elementos nas diagonais superior e inferior
+    for (let i = 0; i < n - 1; i++) {
+      
+      if (matrix[i][i + 1] !== -1) {
+        matrix[i][i + 1] = -1;
+      }
+      if (matrix[i + 1][i] !== -1) {
+        matrix[i + 1][i] = -1;
+      }
+    }
+  
+    return matrix;
+  }
+\end{lstlisting}
+\bigskip
+A decomposição de Cholesky é uma técnica eficiente para resolver sistemas lineares simétricos e definidos positivos, mas seu custo computacional pode ser alto para matrizes muito grandes. Além disso, a complexidade do algoritmo cresce de forma quadrática com o tamanho da matriz.
 
 
 \end{document}
